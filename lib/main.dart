@@ -52,7 +52,6 @@ class _RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: Text('Saved Suggestions'),
-              title: Text('Saved Suggestions 2'),
             ),
             body: ListView(children: divided),
           );
