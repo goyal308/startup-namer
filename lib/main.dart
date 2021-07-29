@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
     final wordPair = WordPair.random();
     return MaterialApp(
       title: 'Testing to insert in github Welcome to Flutter',
+      theme: ThemeData(          // Add the 3 lines from here...
+        primaryColor: Colors.white,
+      ),
       home: RandomWords(),
     );
   }
@@ -27,13 +30,46 @@ class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _saved = <WordPair>{};
   final _biggerFont = const TextStyle(fontSize: 18.0);
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        // NEW lines from here...
+        builder: (BuildContext context) {
+          final tiles = _saved.map(
+                (WordPair pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+          final divided = tiles.isNotEmpty
+              ? ListTile.divideTiles(context: context, tiles: tiles).toList()
+              : <Widget>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Saved Suggestions'),
+            ),
+            body: ListView(children: divided),
+          );
+        }, // ...to here.
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Startup Name Generator 1'),
+        actions: [
+          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+        ],
       ),
       body: _buildSuggestions(),
+
     );
   }
   Widget _buildSuggestions() {
@@ -60,6 +96,15 @@ class _RandomWordsState extends State<RandomWords> {
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
       ),
+      onTap: () {      // NEW lines from here...
+        setState(() {
+          if (alreadySaved) {
+            _saved.remove(pair);
+          } else {
+            _saved.add(pair);
+          }
+        });
+      },
     );
   }
 
