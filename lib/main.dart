@@ -52,6 +52,7 @@ class _RandomWordsState extends State<RandomWords> {
           return Scaffold(
             appBar: AppBar(
               title: Text('Saved Suggestions'),
+              title: Text('Saved Suggestions 2'),
             ),
             body: ListView(children: divided),
           );
@@ -63,7 +64,7 @@ class _RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Startup Name Generator 1'),
+        title: const Text('Startup Name Generator new'),
         actions: [
           IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
         ],
