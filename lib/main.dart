@@ -29,7 +29,7 @@ class RandomWords extends StatefulWidget {
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _saved = <WordPair>{};
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  final _biggerFont = const TextStyle(fontSize: 17.0);
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -74,13 +74,13 @@ class _RandomWordsState extends State<RandomWords> {
   }
   Widget _buildSuggestions() {
     return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(15.0),
         itemBuilder: /*1*/ (context, i) {
           if (i.isOdd) return const Divider(); /*2*/
 
           final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(12)); /*4*/
+            _suggestions.addAll(generateWordPairs().take(15)); /*4*/
           }
           return _buildRow(_suggestions[index]);
         });
